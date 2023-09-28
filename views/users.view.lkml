@@ -44,6 +44,7 @@ view: users {
   dimension: state {
     type: string
     sql: ${TABLE}.state ;;
+    # suggest_persist_for: "0 seconds"
   }
   dimension: zip {
     type: zipcode
@@ -57,15 +58,15 @@ view: users {
   # ----- Sets of fields for drilling ------
   set: detail {
     fields: [
-	id,
-	first_name,
-	last_name,
-	events.count,
-	orders.count,
-	saralooker.count,
-	sindhu.count,
-	user_data.count
-	]
+  id,
+  first_name,
+  last_name,
+  events.count,
+  orders.count,
+  saralooker.count,
+  sindhu.count,
+  user_data.count
+  ]
   }
 
 }
