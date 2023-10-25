@@ -11,6 +11,8 @@ datagroup: mtrmisathelook_default_datagroup {
 
 persist_with: mtrmisathelook_default_datagroup
 
+explore: union_test {}
+
 explore: billion_orders {
   join: orders {
     type: left_outer
@@ -102,6 +104,10 @@ explore: inventory_items {
 }
 
 explore: orders {
+  access_filter: {
+    field: orders.status
+    user_attribute: order_status
+  }
   join: users {
     type: left_outer
     sql_on: ${orders.user_id} = ${users.id} ;;
@@ -217,7 +223,9 @@ explore: test {}
 
 explore: test_space_in_column_name {}
 
-explore: users {}
+explore: usertest {
+  view_name: users
+}
 
 explore: user_data {
   join: users {

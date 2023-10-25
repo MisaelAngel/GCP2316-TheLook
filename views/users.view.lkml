@@ -46,6 +46,21 @@ view: users {
     sql: ${TABLE}.state ;;
     # suggest_persist_for: "0 seconds"
   }
+  parameter: test_parameter {
+    type: unquoted
+    suggest_dimension: state
+    default_value: ""
+  }
+  dimension: state_test {
+    type: string
+    sql:
+    {% if test_parameter._parameter_value != "" %}
+    ${state}
+    {% else %}
+    NULL
+    {% endif %}
+    ;;
+  }
   dimension: zip {
     type: zipcode
     sql: ${TABLE}.zip ;;
@@ -54,6 +69,16 @@ view: users {
     type: count
     drill_fields: [detail*]
   }
+
+  measure: test_number {
+    type: number
+    sql: ${count} ;;
+  }
+
+  # dimension: is_male {
+  #   type: yesno
+  #   sql: ${gender} = 'm'  ;;
+  # }
 
   # ----- Sets of fields for drilling ------
   set: detail {
